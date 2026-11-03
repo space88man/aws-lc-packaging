@@ -1,0 +1,27 @@
+Description: c_rehash: find the openssl tool under its dist-pkg name
+ With ENABLE_DIST_PKG the openssl tool is installed as aws-lc-openssl and the
+ script as aws-lc-c_rehash, but the script looks for "openssl" beside itself
+ and always fails. Look for aws-lc-openssl first, then openssl.
+Author: S-P Chan <shihping.chan@gmail.com>
+Forwarded: no
+Last-Update: 2026-11-03
+---
+--- a/tool-openssl/c_rehash.sh
++++ b/tool-openssl/c_rehash.sh
+@@ -7,10 +7,13 @@
+ # Get absolute path to script directory
+ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+ 
+-# Check for openssl binary in same directory
+-if [ -x "${SCRIPT_DIR}/openssl" ]; then
++# Check for openssl binary in same directory; distribution packaging mode
++# (ENABLE_DIST_PKG) installs it as aws-lc-openssl
++if [ -x "${SCRIPT_DIR}/aws-lc-openssl" ]; then
++    "${SCRIPT_DIR}/aws-lc-openssl" rehash "$@"
++elif [ -x "${SCRIPT_DIR}/openssl" ]; then
+     "${SCRIPT_DIR}/openssl" rehash "$@"
+ else
+-    echo "Error: AWS-LC openssl binary not found at '${SCRIPT_DIR}/openssl'"
++    echo "Error: AWS-LC openssl binary not found in '${SCRIPT_DIR}'"
+     exit 1
+ fi

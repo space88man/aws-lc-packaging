@@ -1,0 +1,17 @@
+.TH AWS-LC-C_REHASH 1 "November 2026" "aws-lc 5.12.0" "User Commands"
+.SH NAME
+aws-lc-c_rehash \- create symbolic links to certificates by subject hash
+.SH SYNOPSIS
+.B aws-lc-c_rehash
+.RI [ options ]
+.RI [ directory ...]
+.SH DESCRIPTION
+.B aws-lc-c_rehash
+runs
+.B aws-lc-openssl rehash
+with its arguments, which scans directories for certificates and CRLs and
+creates the hash-named symbolic links that OpenSSL-style certificate lookup
+expects. The script prints a trace of its commands on standard error.
+.SH SEE ALSO
+.BR aws-lc-openssl (1),
+.BR c_rehash (1)

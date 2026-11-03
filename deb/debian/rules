@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+include /usr/share/dpkg/architecture.mk
+
+# upstream distribution-packaging mode: libcrypto-awslc.so.1 /
+# libssl-awslc.so.1, symbols versioned AWS_LC_1.0, headers in include/aws-lc,
+# tools prefixed aws-lc-. RelWithDebInfo replaces debhelper's
+# CMAKE_BUILD_TYPE=None: a non-release build type compiles in test hooks
+# (BORINGSSL_DISPATCH_TEST). Go and Perl stay off: the pre-generated sources
+# in the tarball are used and the build needs no network.
+CONFIGURE_FLAGS = \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DBUILD_SHARED_LIBS=ON \
+	-DENABLE_DIST_PKG=ON \
+	-DDISABLE_GO=ON \
+	-DDISABLE_PERL=ON \
+	-DENABLE_SOURCE_MODIFICATION=OFF
+
+ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+CONFIGURE_FLAGS += -DBUILD_TESTING=OFF
+endif
+
+%:
+	dh $@ --buildsystem=cmake+ninja
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(CONFIGURE_FLAGS)
+
+# upstream's run_minimal_tests (no Go, no network)
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	cd obj-$(DEB_HOST_GNU_TYPE) && ./crypto/crypto_test
+	cd obj-$(DEB_HOST_GNU_TYPE) && ./crypto/urandom_test
+	cd obj-$(DEB_HOST_GNU_TYPE) && ./ssl/ssl_test
+endif

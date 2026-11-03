@@ -1,0 +1,31 @@
+#!/bin/sh
+# compile against AWS-LC with pkg-config, link both libraries, run a digest
+# and a TLS context; check the binary binds the AWS_LC_1.0 symbols
+set -e
+cd "${AUTOPKGTEST_TMP:-$(mktemp -d)}"
+cat > t.c <<'C'
+#include <stdio.h>
+#include <string.h>
+#include <openssl/evp.h>
+#include <openssl/ssl.h>
+#ifndef OPENSSL_IS_AWSLC
+#error "not the AWS-LC headers"
+#endif
+int main(void)
+{
+	unsigned char md[EVP_MAX_MD_SIZE];
+	unsigned int n;
+	SSL_CTX *ctx = SSL_CTX_new(TLS_method());
+
+	if(ctx == NULL || !EVP_Digest("abc", 3, md, &n, EVP_sha256(), NULL))
+		return 1;
+	printf("%s sha256(abc)=%02x%02x..%02x\n", OpenSSL_version(OPENSSL_VERSION),
+			md[0], md[1], md[n - 1]);
+	SSL_CTX_free(ctx);
+	return !(md[0] == 0xba && md[1] == 0x78 && md[n - 1] == 0xad);
+}
+C
+gcc -o t t.c $(pkg-config --cflags --libs aws-lc)
+./t
+nm -D t | grep -q '@AWS_LC_1.0'
+echo "ok: linked $(readelf -d t | sed -n 's/.*NEEDED.*\[\(lib[a-z]*-awslc[^]]*\)\]/\1/p' | tr '\n' ' ')"

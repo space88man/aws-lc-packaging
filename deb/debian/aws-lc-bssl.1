@@ -1,0 +1,20 @@
+.TH AWS-LC-BSSL 1 "November 2026" "aws-lc 5.12.0" "User Commands"
+.SH NAME
+aws-lc-bssl \- BoringSSL-style command line tool built on AWS-LC
+.SH SYNOPSIS
+.B aws-lc-bssl
+.I command
+.RI [ options ]
+.SH DESCRIPTION
+.B aws-lc-bssl
+is the BoringSSL
+.B bssl
+tool as shipped by AWS-LC, for testing TLS connections, measuring
+performance and computing digests. Run it without arguments to list the
+commands.
+.PP
+Commands: ciphers, client, isfips, generate-ech, generate-ed25519, genrsa,
+md5sum, pkcs12, rand, s_client, s_server, server, sha1sum, sha224sum,
+sha256sum, sha384sum, sha512sum, sha512256sum, sign, speed, version.
+.SH SEE ALSO
+.BR aws-lc-openssl (1)

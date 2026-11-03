@@ -1,0 +1,3 @@
+Tests: build-and-link
+Depends: build-essential, libaws-lc-dev, pkgconf
+Restrictions: allow-stderr

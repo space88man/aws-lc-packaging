@@ -1,0 +1,78 @@
+Source: aws-lc
+Section: libs
+Priority: optional
+Maintainer: S-P Chan <shihping.chan@gmail.com>
+Build-Depends:
+ cmake (>= 3.12),
+ debhelper-compat (= 13),
+ ninja-build,
+Standards-Version: 4.7.2
+Homepage: https://github.com/aws/aws-lc
+Vcs-Browser: https://github.com/space88man/aws-lc-packaging
+Vcs-Git: https://github.com/space88man/aws-lc-packaging.git [deb]
+Rules-Requires-Root: no
+
+Package: libcrypto-awslc1
+Architecture: amd64 arm64
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: AWS-LC general-purpose cryptographic library
+ AWS-LC is a general-purpose cryptographic library maintained by the AWS
+ Cryptography team, based on code from the Google BoringSSL project and the
+ OpenSSL project. It offers the OpenSSL 1.1.1 API.
+ .
+ This package contains libcrypto-awslc. Its library name, its SONAME and its
+ versioned symbols (AWS_LC_1.0) are distinct from OpenSSL's, so it installs
+ and loads beside the system OpenSSL.
+
+Package: libssl-awslc1
+Architecture: amd64 arm64
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: AWS-LC TLS library
+ AWS-LC is a general-purpose cryptographic library maintained by the AWS
+ Cryptography team, based on code from the Google BoringSSL project and the
+ OpenSSL project. It offers the OpenSSL 1.1.1 API.
+ .
+ This package contains libssl-awslc, the TLS library. Its library name, its
+ SONAME and its versioned symbols (AWS_LC_1.0) are distinct from OpenSSL's,
+ so it installs and loads beside the system OpenSSL.
+
+Package: libaws-lc-dev
+Section: libdevel
+Architecture: amd64 arm64
+Multi-Arch: same
+Depends:
+ libcrypto-awslc1 (= ${binary:Version}),
+ libssl-awslc1 (= ${binary:Version}),
+ ${misc:Depends},
+Description: AWS-LC development files
+ AWS-LC is a general-purpose cryptographic library maintained by the AWS
+ Cryptography team, based on code from the Google BoringSSL project and the
+ OpenSSL project. It offers the OpenSSL 1.1.1 API.
+ .
+ This package contains the headers in /usr/include/aws-lc, the linker
+ symlinks, the pkg-config files (aws-lc, libcrypto-awslc, libssl-awslc) and
+ the CMake package files (crypto, ssl). Compile with
+ "pkg-config --cflags --libs aws-lc": <openssl/...> then resolves to the
+ AWS-LC headers.
+
+Package: aws-lc-tools
+Section: utils
+Architecture: amd64 arm64
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: AWS-LC command line tools
+ AWS-LC is a general-purpose cryptographic library maintained by the AWS
+ Cryptography team, based on code from the Google BoringSSL project and the
+ OpenSSL project.
+ .
+ This package contains aws-lc-openssl and aws-lc-bssl, command line tools
+ built against AWS-LC, and the aws-lc-c_rehash script. They are named apart
+ from the OpenSSL tools.

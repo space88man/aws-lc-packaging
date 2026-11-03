@@ -1,0 +1,6 @@
+usr/include/aws-lc
+usr/lib/${DEB_HOST_MULTIARCH}/crypto/cmake
+usr/lib/${DEB_HOST_MULTIARCH}/libcrypto-awslc.so
+usr/lib/${DEB_HOST_MULTIARCH}/libssl-awslc.so
+usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig
+usr/lib/${DEB_HOST_MULTIARCH}/ssl/cmake

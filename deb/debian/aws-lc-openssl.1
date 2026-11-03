@@ -1,0 +1,24 @@
+.TH AWS-LC-OPENSSL 1 "November 2026" "aws-lc 5.12.0" "User Commands"
+.SH NAME
+aws-lc-openssl \- OpenSSL-compatible command line tool built on AWS-LC
+.SH SYNOPSIS
+.B aws-lc-openssl
+.I command
+.RI [ options ]
+.SH DESCRIPTION
+.B aws-lc-openssl
+is AWS-LC's implementation of a subset of the
+.BR openssl (1)
+command line tool. It is installed under this name so that it does not
+replace the OpenSSL tool. Run it without arguments, or with
+.BR help ,
+to list the commands.
+.PP
+Commands: asn1parse, ca, crl, dgst, dhparam, ec, ecparam, enc, genpkey,
+genrsa, md5, ocsp, pkcs12, pkcs8, pkey, pkeyutl, rand, rehash, req, rsa,
+sha1, s_client, verify, version, x509. Options follow the OpenSSL tool where
+a command is implemented; not every OpenSSL option is supported.
+.SH SEE ALSO
+.BR openssl (1),
+.BR aws-lc-bssl (1),
+.BR aws-lc-c_rehash (1)

@@ -1,0 +1,11 @@
+aws-lc (5.12.0+ds-1) unstable; urgency=medium
+
+  * Initial release: AWS-LC 5.12.0 in upstream's distribution-packaging
+    mode (libcrypto-awslc.so.1, libssl-awslc.so.1, AWS_LC_1.0 symbol
+    versions, headers in /usr/include/aws-lc, aws-lc- prefixed tools).
+  * Repacked (+ds): drop the FIPS security policy PDFs, the RFC 8032 text and
+    prebuilt binaries without source (see Files-Excluded in debian/copyright).
+  * c_rehash: find the openssl tool as aws-lc-openssl (dist-pkg name).
+  * Add manual pages for aws-lc-openssl, aws-lc-bssl and aws-lc-c_rehash.
+
+ -- S-P Chan <shihping.chan@gmail.com>  Tue, 03 Nov 2026 07:30:00 +0800

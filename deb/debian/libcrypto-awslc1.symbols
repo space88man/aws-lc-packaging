@@ -1,0 +1,3 @@
+libcrypto-awslc.so.1 libcrypto-awslc1 #MINVER#
+* Build-Depends-Package: libaws-lc-dev
+ (symver)AWS_LC_1.0 5.12.0
