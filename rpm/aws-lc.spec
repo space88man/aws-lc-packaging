@@ -32,8 +32,8 @@
 %global abi_version 1
 
 Name:           aws-lc
-Version:        5.12.0
-Release:        3%{?dist}
+Version:        5.13.0
+Release:        1%{?dist}
 Summary:        Command line tools for AWS-LC
 
 # AWS-LC code: Apache-2.0 OR ISC; BoringSSL-derived: ISC or Apache-2.0;
@@ -153,6 +153,9 @@ env --unset=AWSLC_CRYPTO_POLICY_FILE AWSLC_CRYPTO_POLICY_TEST_REQUIRE_SYSTEM=1 \
 %{_libdir}/ssl/
 
 %changelog
+* Sat Nov 07 2026 S-P Chan <shihping.chan@gmail.com> - 5.13.0-1
+- Update to AWS-LC v5.13.0
+
 * Tue Nov 03 2026 S-P Chan <shihping.chan@gmail.com> - 5.12.0-3
 - aws-lc-c_rehash: find the tool as aws-lc-openssl; it always failed before
 

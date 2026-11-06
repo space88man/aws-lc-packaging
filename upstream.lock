@@ -1,9 +1,9 @@
 # pinned upstream source: the GitHub tag tarball (= spec Source0); scripts
 # fetch it into .cache/ on demand and check this sha256
-AWSLC_VERSION=5.12.0
-AWSLC_TAG=v5.12.0
-AWSLC_URL=https://github.com/aws/aws-lc/archive/v5.12.0/aws-lc-5.12.0.tar.gz
-AWSLC_SHA256=52c7f98ffd296d267cc015ad4653d1ffae399db65b14421da4f5f7efc44becd2
+AWSLC_VERSION=5.13.0
+AWSLC_TAG=v5.13.0
+AWSLC_URL=https://github.com/aws/aws-lc/archive/v5.13.0/aws-lc-5.13.0.tar.gz
+AWSLC_SHA256=36169f60b2fd0619d919ac2e76da6b7912262256b93908f5c702a4c1b6c9b110
 # the Debian +ds orig repacked from it by scripts/build-deb.sh (GNU tar 1.35,
 # xz 5.8 on trixie); a different sha256 warns: same content, other tool versions
-AWSLC_DS_ORIG_SHA256=952894a9f85fe888cac3a838b3c942575bd6dac5480db9924a9b30e005ca96c7
+AWSLC_DS_ORIG_SHA256=ff5848a82d11f80732f9374ffc3fd8216054b78f1895c96c7dc10a6d2451844b
